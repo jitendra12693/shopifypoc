@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-header">Product Management
+        <a href="#" class="btn btn-primary float-right" routerLink="add-product" ><i class="fa fa-plus"></i> Add Product</a>
+    </div>
+    <div class="card-body">
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <!-- <th scope="col">Description</th> -->
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productList">
+                <td>
+                    <img [src]="item.image.src" style="height: 50px;width:80px;" alt="image"/>
+                </td>
+                <td>
+                    {{item.title}}
+                </td>
+                <td>
+                    {{item.variants[0].price}}
+                </td>
+                <!-- <td>
+                    {{item.Description}}
+                </td> -->
+                <td>
+                    <a (click)="ConfirmBox(item.ProductId)">
+                        <span class="span" style="cursor: pointer;" (click)="removefromcart(item.ProductId)" ><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+  

@@ -1,0 +1,86 @@
+<div class="card card-success">
+    <div class="card-header text-center">
+      Add New Product
+    </div>
+    <div class="card-body">
+      <div *ngIf="Success" class="alert alert-success">{{Success}}</div>
+      <div *ngIf="Error" class="alert alert-danger">{{Error}}</div>
+      <form #productForm="ngForm">
+        <div class="form-group">
+          <label for="Category">Product Type</label>
+          <select class="form-control" id="product_type" name="product_type" [(ngModel)]="product.product_type" #product_type="ngModel" required >
+            <option label="--Select Product Type --">Open this select menu</option>
+            <option *ngFor="let category of categoryList" [value]="category.CategoryId">{{category.CategoryName}}</option>
+          </select>
+          <div *ngIf="product_type.invalid && product_type.touched">
+            <div class="text-danger" *ngIf="product_type.errors?.required">
+                Product Name is required!
+            </div>
+        </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Product Name</label>
+          <input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="product.title" required>
+            <div *ngIf="title.invalid && title.touched">
+                <div class="text-danger" *ngIf="title.errors?.required">
+                    Product Name is required!
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Price</label>
+          <input type="number" class="form-control" name="price" #price="ngModel" [(ngModel)]="variant.price" required >
+          <div *ngIf="price.invalid && price.touched">
+            <div class="text-danger" *ngIf="price.errors?.required">
+                Product price is required!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Compare at Price</label>
+          <input type="number" class="form-control" name="compare_at_price" #compare_at_price="ngModel" [(ngModel)]="variant.compare_at_price" required >
+          <div *ngIf="compare_at_price.invalid && compare_at_price.touched">
+            <div class="text-danger" *ngIf="compare_at_price.errors?.required">
+                Product compared price is required!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Quantity</label>
+          <input type="number" class="form-control" name="inventory_quantity" #inventory_quantity="ngModel" [(ngModel)]="variant.inventory_quantity" required >
+          <div *ngIf="inventory_quantity.invalid && inventory_quantity.touched">
+            <div class="text-danger" *ngIf="inventory_quantity.errors?.required">
+                Product quantity is required!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">SKU</label>
+          <input type="text" class="form-control" name="sku" #sku="ngModel" [(ngModel)]="variant.sku" required >
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Description</label>
+           <input type="text" class="form-control" name="body_html" #body_html="ngModel" [(ngModel)]="product.body_html" required >
+           <div *ngIf="body_html.invalid && body_html.touched">
+            <div class="text-danger" *ngIf="body_html.errors?.required">
+                Product description is required!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Upload Images</label>
+          <input type="file" class="form-control" name="ProductImage" accept=".png,.jpeg,.jpg,.jfif" [(ngModel)]="image.filename" 
+          (change)="showPreview($event)" #ProductImage="ngModel">
+          <div *ngIf="image.filename.invalid && image.filename.touched">
+            <div class="text-danger" *ngIf="image.filename.errors?.required">
+                Product image is required!
+            </div>
+          </div>
+        </div>
+    </form>
+    </div>
+    <div class="card-footer text-center">
+      <button type="button" class="btn btn-primary" [disabled]="productForm.form.invalid" (click)="SaveProduct()" >Submit</button>
+    </div>
+  </div>
+  
